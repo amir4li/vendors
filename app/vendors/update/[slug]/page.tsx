@@ -2,7 +2,7 @@ import { ParamsType } from '@/types';
 import { VendorForm } from "@/components";
 
 async function getVendor(id: string) {
-    const response = await fetch(`http://localhost:3000/api/vendors/${id}`);
+    const response = await fetch(`${process.env.BASE_URL}/api/vendors/${id}`);
     const data = await response.json();
     return data;
 };

@@ -1,6 +1,5 @@
 "use client"
 
-import React, { useState } from 'react';
 import { useRouter } from "next/navigation";
 import CustomButton from "./CustomButton";
 import { VendorType } from "@/types";

@@ -5,7 +5,7 @@ import { VendorList } from "@/components";
 import Header from "@/components/Header";
 
 async function getData() {
-    const response = await fetch("http://localhost:3000/api/vendors");
+    const response = await fetch(`${process.env.BASE_URL}/api/vendors`);
     const data = await response.json();
     const vendors = data.data;
     return vendors;
