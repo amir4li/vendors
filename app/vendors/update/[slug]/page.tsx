@@ -1,5 +1,8 @@
 import { ParamsType } from '@/types';
 import { VendorForm } from "@/components";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 async function getVendor(id: string) {
     const response = await fetch(`${process.env.BASE_URL}/api/vendors/${id}`);
@@ -8,7 +11,13 @@ async function getVendor(id: string) {
 };
 
 const EditVendor = async ({ params }: ParamsType) => {
+    const session = await getServerSession(authOptions);
     const id = params.slug;
+    
+    if (!session) {
+        redirect(`/signin?callbackUrl=/vendors/update/${id}`)
+    };
+
     const vendor = await getVendor(id);
 
     return (

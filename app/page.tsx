@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { redirect } from "next/navigation";
+import { Loading } from "@/components";
 
 export default function Home() {
   useEffect(()=> {
@@ -10,7 +11,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Home</h1>
+      <Loading />
     </div>
   )
 };

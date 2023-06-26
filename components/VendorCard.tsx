@@ -1,8 +1,10 @@
 "use client"
 
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import CustomButton from "./CustomButton";
 import { VendorType } from "@/types";
+
 
 interface VendorCardProps {
     vendor: VendorType;
@@ -10,6 +12,7 @@ interface VendorCardProps {
 
 
 function VendorCard({vendor}: VendorCardProps) {
+    const { status } = useSession();
     const router = useRouter();
 
     const handleEdit = (id: any)=> {
@@ -17,26 +20,27 @@ function VendorCard({vendor}: VendorCardProps) {
     };
 
     const handleDelete = async (id: any)=> {
-        if (confirm("Are you sure you wanat to delete this vendor?")) {
-            try {
-                const response = await fetch(`/api/vendors/${id}`, {
-                    method: "DELETE",
-                    headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json"
-                    },
-                });
-    
-                if (response.status === 200) {
-                    alert("Vendor is deleted successfully");
-                    router.push('/vendors');
-                }
-                
-            } catch (err) {
-                alert("Error deleting vendor");
-                
+        if (status === "unauthenticated") {
+            alert("Please sign in first.")
+        } else {
+            if (confirm("Are you sure you wanat to delete this vendor?")) {
+                try {
+                    const response = await fetch(`/api/vendors/${id}`, {
+                        method: "DELETE",
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json"
+                        },
+                    });
+                    if (response.status === 200) {
+                        alert("Vendor is deleted successfully");
+                        router.push('/vendors');
+                    };
+                } catch (err) {
+                    alert("Error deleting vendor");
+                };
             };
-        };
+        }
     };
 
     return (

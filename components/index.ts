@@ -3,8 +3,9 @@ import VendorList from "./VendorList";
 import VendorCard from "./VendorCard";
 import CustomButton from "./CustomButton";
 import GoogleSignInButton from "./GoogleSignInButton";
-import SignOutButton from "./SignOutButton";
+import AuthButton from "./AuthButton";
 import VendorForm from "./VendorForm";
+import Loading from "./Loading";
 
 
 export {
@@ -13,7 +14,8 @@ export {
     VendorCard,
     CustomButton,
     GoogleSignInButton,
-    SignOutButton,
-    VendorForm
+    AuthButton,
+    VendorForm,
+    Loading
 };
 
